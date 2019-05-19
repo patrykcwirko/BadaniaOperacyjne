@@ -22,9 +22,9 @@ def mtime(opt='start'):
 #rozmiar=open("rozmiar.txt","w")
 latex=open("latex.txt", "w")
 '''
-latex = open("latexmod.txt", "w")
+latex = open("latex.txt", "w")
 plik = []
-for i in range(121):
+for i in range(50):  # Liczba plików w folderze ta, max 121
     if i < 10:
         nazwa = './ta/ta00' + str(i) + '.txt'
     elif i < 100:
@@ -53,4 +53,4 @@ for i in range(len(plik)):
 latex.close()
 
 
-def losowanie
+# def losowanie
