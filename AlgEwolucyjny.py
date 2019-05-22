@@ -1,5 +1,5 @@
-def Reprodukcja
+def Reprodukcja():
 
-def krzyzowanie
+def krzyzowanie():
 
-def mutacja
+def mutacja():
