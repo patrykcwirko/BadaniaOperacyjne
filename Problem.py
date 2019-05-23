@@ -1,7 +1,45 @@
-from job import *
+#
+# Zawiera opis problemu i narzędzia do ustalenia jego cech
+#
+import numpy as np
+
+class Problem:
+    """
+    Jobs req times on every machine so:
+
+    time_on_machines=[t1,t2,..,tn] for n machines
+
+    """
+    machine = 0
+    task = 0
+    # Constructor of problem
+    def __init__(self):
+        self.machins = 0
+        self.task = 0
+        self.time = [[0] * self.machine for i in range(self.task)]
+        self.Cmax = 0
 
 
-def c_max(queue, jobs=[Job]):
+def num_of_machines(jobs):
+    # returns number of machines 0 if jobs list is empty and -1 if number of machines is different
+    nmin = 0;
+    nmax = 0;
+    if len(jobs) > 0:
+        nmin = nmax = jobs[0].size
+        for i in range(1, len(jobs)):
+            if jobs[i].size < nmin:
+                nmin = jobs[i].size
+            elif jobs[i].size > nmax:
+                nmax = jobs[i].size
+        if nmin == nmax:
+            return nmin
+        else:
+            return 0
+    else:
+        return 0
+
+
+def c_max(queue, jobs=[Problem]):
     """
     Simulate process
     :param queue: An order to simulate total time
@@ -35,50 +73,5 @@ def c_max(queue, jobs=[Job]):
 
     return machines_diary[machines-1]  # the last done job
 
-
-def neh(jobs):
-    v_jobslist = []  # virtal jobs list (only 1 machine, time=time(0)+time(1)+...+time(n))
-    for i in range(len(jobs)):
-        sum = 0
-        for j in range(jobs[i].size):
-            sum = sum+jobs[i].time(j)
-        v_jobslist.append([sum, len(jobs)-i])
-
-    v_jobslist.sort(reverse=True)
-    for i in range(len(v_jobslist)):
-        v_jobslist[i][1] = (v_jobslist[i][1]-len(v_jobslist))*(-1)
-
-    perm = []  # best queue
-    perm.append(v_jobslist[0][1])  # first job (max time)
-    cmaxlist = []
-    perm_list = []
-    tmp_perm = []  # temporary queue
-
-    for k in range(len(perm)):
-        tmp_perm.append(perm[k])  # tmp_perm=perm
-    for i in range(1, len(v_jobslist)):
-        for j in range(i+1):
-            tmp_perm.insert(j, v_jobslist[i][1])  #a dd on position i
-            # print(" PERM: ",tmp_perm, "CMAX: ", c_max(tmp_perm, jobs))
-            cmaxlist.append(c_max(tmp_perm, jobs))  # and check time using cmax
-            perm_list.append(tmp_perm)
-            tmp_perm = []  #tmp_perm=perm
-            for k in range(len(perm)):
-                tmp_perm.append(perm[k])
-
-        # Queue update!
-        cmaxmin=cmaxlist[0]
-        index = 0
-        for j in range(1, len(cmaxlist)): # min(cmaxlist)
-            if cmaxlist[j] < cmaxmin:
-                cmaxmin = cmaxlist[j]
-                index = j
-        perm = perm_list[index]  # and update...
-        cmaxlist = []
-        perm_list = []
-        tmp_perm = []  # tmp_perm=perm
-        for k in range(len(perm)):
-            tmp_perm.append(perm[k])
-    return perm
 
 
