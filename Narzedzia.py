@@ -31,6 +31,7 @@ def jobs_load(file_path='./ta000.txt'):
     with open(file_path, 'r') as f:
         jobs_list = []
         lines = []
+        problem = Problem()
 
         '''Load NAME and PARAMETERS'''
         for line in f:
@@ -46,10 +47,11 @@ def jobs_load(file_path='./ta000.txt'):
                 break
             values = [int(i) for i in line.split()]
             jobs_list.append(values)
-        Problem.machine = machines
-        Problem.task = jobs
-        Problem.time = jobs_list
-    return Problem
+        problem.machine = machines
+        problem.task = jobs
+        problem.time = jobs_list
+        print(machines)
+    return problem
 
 # def losowanie
 
@@ -74,4 +76,5 @@ for i in range(len(plik)):
     print(plik[i])
     # Load jobs from file
     problem = jobs_load(plik[i])
-    print(problem.time)
+    print(problem.machins)
+    print(c_max(problem))
