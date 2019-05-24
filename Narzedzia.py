@@ -72,4 +72,16 @@ for i in range(len(plik)):
     print(plik[i])
     # Load jobs from file
     problem = jobs_load(plik[i])
-    print('Cmax = ' + str(c_max(problem)))
+    # print('Cmax = ' + str(c_max(problem)))
+    mtime('start')
+    Cmax = c_max(problem)
+    time_neh = mtime('stop')
+    if i < 10:
+        nazwa = 'ta00' + str(i)
+    elif i < 100:
+        nazwa = 'ta0' + str(i)
+    else:
+        nazwa = 'ta' + str(i)
+
+    latex.write("%s, &, %.3f, &, %d\n" % (nazwa, time_neh, Cmax))
+latex.close()
