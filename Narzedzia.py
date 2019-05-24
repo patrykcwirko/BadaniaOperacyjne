@@ -3,6 +3,8 @@
 #
 
 from Problem import *
+from Konfig import *
+from AlgEwolucyjny import *
 import time as t
 
 clock = 0  # clock
@@ -59,7 +61,7 @@ latex=open("latex.txt", "w")
 '''
 latex = open("latex.txt", "w")
 plik = []
-for i in range(50):  # Liczba plików w folderze ta, max 121
+for i in range(1):  # Liczba plików w folderze ta, max 121
     if i < 10:
         nazwa = './ta/ta00' + str(i) + '.txt'
     elif i < 100:
@@ -75,6 +77,7 @@ for i in range(len(plik)):
     # print('Cmax = ' + str(c_max(problem)))
     mtime('start')
     Cmax = c_max(problem)
+    evolution(problem)
     time_neh = mtime('stop')
     if i < 10:
         nazwa = 'ta00' + str(i)

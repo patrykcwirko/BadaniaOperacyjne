@@ -1,5 +1,6 @@
 class konfig:
-    def __init__(self):
-        self.m_max = 600
-        self.n_max = 600
-        self.I_plik = 50
+    m_max = 600
+    n_max = 600
+    I_plik = 50
+    populacja = 5
+    max_los = 30

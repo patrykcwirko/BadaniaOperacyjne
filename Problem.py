@@ -12,36 +12,12 @@ class Problem:
 
     """
     # Constructor of problem
-    def __init__(self):
-        self.machins = 0
-        self.task = 0
-        self.time = [[0] * self.machine for i in range(self.task)]
-        self.Cmax = 0
-
-    def __init__(self, machins, task, time):
+    def __init__(self, machins = 0, task = 0, time = None ):
         self.machins = machins
         self.task = task
-        self.time = time
+        self.time = [[0] * self.machine for i in range(self.task)] if time is None else time
         self.Cmax = 0
-
-
-def num_of_machines(jobs):
-    # returns number of machines 0 if jobs list is empty and -1 if number of machines is different
-    nmin = 0;
-    nmax = 0;
-    if len(jobs) > 0:
-        nmin = nmax = jobs[0].size
-        for i in range(1, len(jobs)):
-            if jobs[i].size < nmin:
-                nmin = jobs[i].size
-            elif jobs[i].size > nmax:
-                nmax = jobs[i].size
-        if nmin == nmax:
-            return nmin
-        else:
-            return 0
-    else:
-        return 0
+        self.perm = []
 
 
 def c_max(problem=Problem):
