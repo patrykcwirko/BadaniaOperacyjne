@@ -31,7 +31,6 @@ def jobs_load(file_path='./ta000.txt'):
     with open(file_path, 'r') as f:
         jobs_list = []
         lines = []
-        problem = Problem()
 
         '''Load NAME and PARAMETERS'''
         for line in f:
@@ -47,10 +46,7 @@ def jobs_load(file_path='./ta000.txt'):
                 break
             values = [int(i) for i in line.split()]
             jobs_list.append(values)
-        problem.machine = machines
-        problem.task = jobs
-        problem.time = jobs_list
-        print(machines)
+        problem = Problem(machines, jobs, jobs_list)
     return problem
 
 # def losowanie
@@ -63,7 +59,7 @@ latex=open("latex.txt", "w")
 '''
 latex = open("latex.txt", "w")
 plik = []
-for i in range(1):  # Liczba plików w folderze ta, max 121
+for i in range(50):  # Liczba plików w folderze ta, max 121
     if i < 10:
         nazwa = './ta/ta00' + str(i) + '.txt'
     elif i < 100:
@@ -76,5 +72,4 @@ for i in range(len(plik)):
     print(plik[i])
     # Load jobs from file
     problem = jobs_load(plik[i])
-    print(problem.machins)
-    print(c_max(problem))
+    print('Cmax = ' + str(c_max(problem)))

@@ -12,11 +12,16 @@ class Problem:
 
     """
     # Constructor of problem
-
     def __init__(self):
         self.machins = 0
         self.task = 0
         self.time = [[0] * self.machine for i in range(self.task)]
+        self.Cmax = 0
+
+    def __init__(self, machins, task, time):
+        self.machins = machins
+        self.task = task
+        self.time = time
         self.Cmax = 0
 
 
@@ -47,42 +52,14 @@ def c_max(problem=Problem):
     :return: Total Time
     """
     #TODO: podłączyć klase konfig
-    v_C = [[0] * 600 for i in range(600)]
-    print(problem.machins)
+    v_C = [[0] * 100 for i in range(100)]
     for i in range(problem.machins):
         for j in range(problem.task):
-            if v_C[i][j-1] < v_C[i-1][j]:
-                v_C[i][j] = v_C[i-1][j] + problem.time[i][j]
+            if v_C[i+1][j] < v_C[i][j+1]:
+                v_C[i+1][j+1] = v_C[i][j+1] + problem.time[j][i]
             else:
-                v_C[i][j] = v_C[i][j-1] + problem.time[i][j]
-        print("test")
+                v_C[i+1][j+1] = v_C[i+1][j] + problem.time[j][i]
     return v_C[problem.machins][problem.task]
-    # def sim_time(job, machines_diary):
-    #     """
-    #     Simulate job
-    #     :param job: times on machines
-    #     :param machines_diary: last done job on machines
-    #     :return:
-    #     """
-    #     machines_list = range(0, np.shape(job.time_on_machine)[0])
-    #     time = 0
-    #
-    #     for machine in machines_list:
-    #         delay = machines_diary[machine] - time  # job delay
-    #         if delay < 0:
-    #             delay = 0
-    #         time = time + delay + job.time(machine)  # clock time of job done
-    #         machines_diary[machine] = time  # new time in diary
-    #
-    # machines = np.shape(jobs[0].time_on_machine)[0] # number of machines
-    # machines_diary = [0] * machines                 # array [t_1,t_2,t_machines] then job is done (new time)
-    # time=0
-    # machines_working = [0] * machines
-    #
-    # for job in queue:
-    #     sim_time(jobs[job], machines_diary)
-    #
-    # return machines_diary[machines-1]  # the last done job
 
 
 
