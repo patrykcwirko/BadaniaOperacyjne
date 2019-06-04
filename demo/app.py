@@ -2,7 +2,7 @@ from itertools import *
 from algorithm_sa import sa
 import time as t
 from job import jobs_load
-from algorithm_neh import QNEH
+from algorithm_neh import NEH
 from algorithm_cmax import c_max
 import  numpy as np
 clock = 0  # clock
@@ -22,7 +22,7 @@ def mtime(opt='start'):
 
 latex = open("latexmod.txt", "w")
 plik = []
-for i in range(120):
+for i in range(40):
     if i < 10:
         nazwa = '../ta/ta00' + str(i) + '.txt'
     elif i < 100:
@@ -36,9 +36,9 @@ for i in range(len(plik)):
     # Load jobs from file
     jobs_list = jobs_load(plik[i])
     mtime('start')
-    order_qneh = QNEH(jobs_list)
-    time_qneh = mtime('stop')
-    cmax_qneh = c_max(order_qneh, jobs_list)
+    order_neh = NEH(jobs_list)
+    time_neh = mtime('stop')
+    cmax_neh = c_max(order_neh, jobs_list)
 
 
     mtime('start')
@@ -63,7 +63,7 @@ for i in range(len(plik)):
     time_sa_n = 0
     for exp in range(exps):
         mtime('start')
-        order_sa_n = sa(order_qneh.copy(), jobs_list.copy(), 1000)
+        order_sa_n = sa(order_neh.copy(), jobs_list.copy(), 1000)
         time_sa_n += mtime('stop')
         cmax_sa_n += c_max(order_sa_n.copy(), jobs_list.copy())
     cmax_sa_n /= exps
@@ -79,7 +79,7 @@ for i in range(len(plik)):
         nazwa = 'ta' + str(i)
 
     latex.write("%s, &, %.3f, &, %d, &, %.3f, &, %d, &, %.3f, &, %.1f, &, %.3f, &, %.1f\n"%(nazwa,
-                                                        time_qneh,  cmax_qneh,
+                                                        time_neh,  cmax_neh,
                                                         time_rand,    cmax_rand,
                                                         time_sa, cmax_sa, # random order
                                                         time_sa_n, cmax_sa_n  # neh order
