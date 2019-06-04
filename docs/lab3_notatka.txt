@@ -1,0 +1,9 @@
+1) podstawowa symulacja # do pominiecia bo wynika z nastepnych	
+2) porownanie najlepszego uzyskanego wyzarzania z czystym nehem # w 1 kolumnie jest. 			
+3) swap a insert # swap/insert (odkomentowanie/zakomentowanie)w definicji sa
+4) chlodzenie cool1 dla parametrow mi=[0.8, 0.9, 0.95, 0.99] # zmiana w kodzie i symulacja od nowa dla 4 mozliwosci
+5) wplyw t_min i t0 na wyniki (oraz/lub zastosowanie cool2)
+6) move_proba2
+7) move_proba3 
+8) neutralna (1,2,3?)(chyba to jest neutralna), losowa(rand), ta z neha
+*9) jakas madness modyfikacja i powtorzenie dla niej wszystkiego co wyzej
