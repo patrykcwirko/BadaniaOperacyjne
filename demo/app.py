@@ -22,7 +22,7 @@ def mtime(opt='start'):
 
 latex = open("latexmod.txt", "w")
 plik = []
-for i in range(40):
+for i in range(80):
     if i < 10:
         nazwa = '../ta/ta00' + str(i) + '.txt'
     elif i < 100:
@@ -41,10 +41,7 @@ for i in range(len(plik)):
     cmax_neh = c_max(order_neh, jobs_list)
 
 
-    mtime('start')
     order = np.random.permutation(len(jobs_list))
-    time_rand = mtime('stop')
-    cmax_rand = c_max(order.copy(), jobs_list.copy())
 
 
     cmax_sa = 0
@@ -52,7 +49,7 @@ for i in range(len(plik)):
     exps = 5
     for exp in range(exps):
         mtime('start')
-        order_sa = sa(order, jobs_list, 1000)
+        order_sa = sa(order, jobs_list, 100)
         time_sa += mtime('stop')
         cmax_sa += c_max(order_sa.copy(), jobs_list.copy())
     cmax_sa /= exps
@@ -78,9 +75,8 @@ for i in range(len(plik)):
     else:
         nazwa = 'ta' + str(i)
 
-    latex.write("%s, &, %.3f, &, %d, &, %.3f, &, %d, &, %.3f, &, %.1f, &, %.3f, &, %.1f\n"%(nazwa,
+    latex.write("%s, &, %.3f, &, %d, &, %.3f, &, %d, &,  %.3f, &, %.1f\n"%(nazwa,
                                                         time_neh,  cmax_neh,
-                                                        time_rand,    cmax_rand,
                                                         time_sa, cmax_sa, # random order
                                                         time_sa_n, cmax_sa_n  # neh order
                                                         ))
